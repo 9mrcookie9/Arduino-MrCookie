@@ -3,6 +3,9 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include "System.h"
+#include "DhtUse.h"
+#include "LcdUse.h"
+#include "ButtonUse.h"
 
 SystemMain mainClass;
 
