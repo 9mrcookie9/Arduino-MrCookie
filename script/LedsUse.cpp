@@ -33,13 +33,10 @@ void TrafficLights::init(int pinR1, int pinY1, int pinG1, int pinR2, int pinY2, 
 	}
 }
 
-void TrafficLights::setColors(int status1, int status2, int status3, int status4, int status5, int status6) {
-	led[0].changeState(status1);
-	led[1].changeState(status2);
-	led[2].changeState(status3);
-	led[3].changeState(status4);
-	led[4].changeState(status5);
-	led[5].changeState(status6);
+void TrafficLights::setColors(int status[6]) {
+	for (int i = 0; i < 6; i++) {
+		led[i].changeState(status[i]);
+	}
 }
 
 void TrafficLights::Use(int startY, int startR, int startSecondY, int endSecondY) {
@@ -62,11 +59,17 @@ void TrafficLights::Use(int startY, int startR, int startSecondY, int endSecondY
 		status[0] = 1;
 		status[3] = 1;
 	}else if (timer >= startSecondY && timer <= endSecondY) {
-		status[1] = 1;
-		status[4] = 1;
+		if (firstLights) {
+			status[2] = 1;
+			status[3] = 1;
+		} else {
+			status[0] = 1;
+			status[4] = 1;
+		}
+			
 	} else {
 			firstLights = !firstLights;
 			timer = 0;
 	}
-	setColors(status[0], status[1], status[2], status[3], status[4], status[5]);
+	setColors(status);
 }
