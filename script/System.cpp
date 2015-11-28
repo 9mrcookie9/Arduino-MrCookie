@@ -1,8 +1,10 @@
 #include "System.h"
 
 void SystemMain::Init(void){
+	Serial.begin(9600);
 	lcdController.lcdClass.SetLcd();
 	dhtController.dht.setDHT(13);
+	analogTempController.init(0);
 	trafficLightController.init(2, 3, 4, 5, 6, 7);
 }
 
@@ -13,6 +15,7 @@ void SystemMain::Setup(void){
 
 void SystemMain::Update(void){
 	lcdController.ScreenRefresh(lcdRefreshTimer);
+	analogTempController.checkData();
 	dhtController.checkData();
 	buttonFirst.Use(12);
 
@@ -23,8 +26,10 @@ void SystemMain::Update(void){
 	else
 		lcdController.lcdClass.PrintS("false",10);
 
-	lcdController.lcdClass.PrintS(tempManual(0),10,1);
-	if(dhtController.lastDataChanged == true || lcdController.clearScreen){
+	if (analogTempController.newData || lcdController.clearScreen) {
+		lcdController.lcdClass.PrintS(analogTempController.temp(), 10, 1);
+	}
+	if(dhtController.lastDataChanged || lcdController.clearScreen){
 		lcdController.lcdClass.PrintS(String("T:"+dhtController.Temperature));
 		lcdController.lcdClass.PrintS(String("W:"+dhtController.Humidity),0,1);
 		dhtController.lastDataChanged = false;
@@ -34,15 +39,5 @@ void SystemMain::Update(void){
 		lcdController.clearScreen = false;
 	}
 }
-
-String SystemMain::tempManual(int pin) {
-	float val = analogRead(pin);
-	float mv = (val / 1024.0) * 5000;
-	float cel = mv / 10;
-	return String(String(cel)+String("C"));
-}
-
-
-
 
 

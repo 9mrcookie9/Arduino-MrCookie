@@ -22,7 +22,7 @@ class TrafficLights {
 public:
 	void init(int pinR1, int pinY1, int pinG1, int pinR2, int pinY2, int pinG2);
 	void Use(int startY,int startR,int startSecondY,int endSecondY);
-	void setColors(int status1, int status2, int status3, int status4, int status5, int status6);
+	void setColors(int status[6]);
 private:
 	unsigned long timer;
 	bool firstLights;

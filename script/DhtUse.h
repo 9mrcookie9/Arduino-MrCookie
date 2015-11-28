@@ -28,5 +28,17 @@ public:
 	float lastTemperature;
 };
 
+class AnalogTemperature {
+public:
+	void init(int pin);
+	void checkData();
+	String temp();
+	bool newData;
+private:
+	unsigned long timer;
+	int pin;
+	float lastData;
+};
+
 #endif
 

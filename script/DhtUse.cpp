@@ -17,3 +17,27 @@ void DhtController::checkData() {
 		Humidity = String(Humidity + "%");
 	}
 }
+
+void AnalogTemperature::init(int Pin) {
+	pin = Pin;
+	checkData();
+	timer = 151;
+}
+
+void AnalogTemperature::checkData() {
+	timer++;
+	if (timer > 150) {
+		timer = 0;
+		float val = round(analogRead(pin));
+		if (lastData != val) {
+			lastData = val;
+			newData = true;
+		}
+	}
+}
+
+String AnalogTemperature::temp() {
+	float mv = (lastData / 1024.0) * 5000;
+	float cel = mv / 10;
+	return String(String(round(cel)) + String("C"));
+}
