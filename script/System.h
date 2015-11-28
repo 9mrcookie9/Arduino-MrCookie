@@ -14,12 +14,12 @@ public:
   void Setup(void);
   void Update(void);
   int lcdRefreshTimer;
+  String tempManual(int pin);
 private:
   DhtController dhtController;
   ButtonMain buttonFirst;
   LcdController lcdController;
   TrafficLights trafficLightController;
-  AnalogTemperature analogTempController;
 };
 
 #endif
