@@ -1,1 +1,3 @@
 []LM35 CLASS
+[]LedTraffic change status to array
+[]LedTraffic waiting on Red -> Red (Actual Yellow)
