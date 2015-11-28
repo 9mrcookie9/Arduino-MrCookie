@@ -6,15 +6,17 @@
 #include "DhtUse.h"
 #include "LcdUse.h"
 #include "ButtonUse.h"
+#include "LedsUse.h"
 
 SystemMain mainClass;
 
 void setup(){
-  mainClass.Init();
-  mainClass.Setup();
+	mainClass.Init();
+	mainClass.Setup();
 }
 
 void loop(){
-  mainClass.Update();
+	_delay_ms(1);
+	mainClass.Update();
 }
 
