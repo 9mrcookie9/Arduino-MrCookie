@@ -29,10 +29,10 @@ void LcdMain::PrintS(String text, int x, int y, bool clearLcd) {
 	lcd->print(text);
 }
 void LcdController::ScreenRefresh(int refreshTime) {
-	timer++;
-	if (timer > refreshTime) {
-		timer = 0;
+	iTimer++;
+	if (iTimer > refreshTime) {
+        iTimer = 0;
 		lcdClass.lcd->clear();
-		clearScreen = true;
+		bClearScreen = true;
 	}
 }

@@ -14,22 +14,20 @@
 
 class LcdMain {
 public:
-	LiquidCrystal_I2C* lcd;
-	void SetLcd(uint8_t port = 0x20, int width = 16, int height = 2);
-	void PrintS(String t, int x = 0, int y = 0, bool lcdClear = false);
-	void Print(uint8_t t, int x = 0, int y = 0, bool lcdClear = false);
-	void HelloWorld_Debug(int x = 0, int y = 0);
+    LiquidCrystal_I2C* lcd;
+    void SetLcd(uint8_t port = 0x20, int width = 16, int height = 2);
+    void PrintS(String t, int x = 0, int y = 0, bool lcdClear = false);
+    void Print(uint8_t t, int x = 0, int y = 0, bool lcdClear = false);
+    void HelloWorld_Debug(int x = 0, int y = 0);
 };
 
 class LcdController {
 public:
-	void ScreenRefresh(int timer);
-	LcdMain lcdClass;
-	bool clearScreen;
+    void ScreenRefresh(int iTimer);
+    LcdMain lcdClass;
+    bool bClearScreen;
 private:
-	unsigned long timer;
+    unsigned long iTimer;
 };
-
-
 #endif
 

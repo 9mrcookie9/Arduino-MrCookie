@@ -19,4 +19,3 @@ void loop(){
 	_delay_ms(1);
 	mainClass.Update();
 }
-

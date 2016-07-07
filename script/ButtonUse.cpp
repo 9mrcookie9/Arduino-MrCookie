@@ -1,20 +1,22 @@
 #include "ButtonUse.h"
 
-void ButtonMain::Use(int id) {
-	if (timer == 0)
-		buttonState = digitalRead(id);
-	else
-		timer++;
+void ButtonMain::Init(int pinId, int timerLimit) {
+    iPin = pinId;
+    iTimerLimit = timerLimit;
+}
 
-	if (timer > 10)
-		timer = 0;
-
-	if (buttonState != lastState && timer == 0) {
-		if (buttonState == 1) {
-			State = !State;
-			if (timer == 0)
-				timer = 1;
-		}
-	}
-	lastState = buttonState;
+bool ButtonMain::State() {
+    if (iTimer == 0)
+        iActualState = digitalRead(iPin);
+    else
+        iTimer++;
+    iTimer = (iTimer > iTimerLimit) ? 0 : iTimer;
+    if (iActualState != iLastState && iTimer == 0) {
+        if (iActualState == 1) {
+            bState = !bState;
+            iTimer = (iTimer == 0) ? 1 : iTimer;
+        }
+    }
+    iLastState = iActualState;
+    return bState;
 }

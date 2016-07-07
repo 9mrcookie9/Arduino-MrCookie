@@ -4,32 +4,32 @@
 
 #include "LedsUse.h"
 
-void LedUse::init(int id) {
-	pin = id;
-	pinMode(pin,OUTPUT);
+void LedUse::Init(int id) {
+	iPin = id;
+	pinMode(iPin,OUTPUT);
 }
 
 void LedUse::changeState(int state) {
-	if (pin == 0) { //CODE: L0C
-		String errorCode = String("Pin == 0! ErrorCode: L0C"); 
+	if (iPin == 0) { //CODE: L0C
+		String errorCode = String("iPin == 0! ErrorCode: L0C"); 
 		if (Serial.available() != 0)
 			Serial.print(errorCode);
 		return;
 	}
-	digitalWrite(pin, state);
+	digitalWrite(iPin, state);
 }
 
 
-void TrafficLights::init(int pinR1, int pinY1, int pinG1, int pinR2, int pinY2, int pinG2) {
-	pin[0] = pinR1;
-	pin[1] = pinY1;
-	pin[2] = pinG1;
-	pin[3] = pinR2;
-	pin[4] = pinY2;
-	pin[5] = pinG2;
+void TrafficLights::init(int iPinR1, int iPinY1, int iPinG1, int iPinR2, int iPinY2, int iPinG2) {
+	iPin[0] = iPinR1;
+	iPin[1] = iPinY1;
+	iPin[2] = iPinG1;
+	iPin[3] = iPinR2;
+	iPin[4] = iPinY2;
+	iPin[5] = iPinG2;
 
 	for (int i = 0; i < 6; i++) {
-		led[i].init(pin[i]);
+		led[i].Init(iPin[i]);
 	}
 }
 
@@ -40,11 +40,11 @@ void TrafficLights::setColors(int status[6]) {
 }
 
 void TrafficLights::Use(int startY, int startR, int startSecondY, int endSecondY) {
-	timer++;
+	iTimer++;
 	int status[6]{0,0,0,0,0,0}; // |0 R| , |1 Y| , |2 G| , |3 R| , |4 Y| , |5 G| 
 
-	if (timer < startY) {
-		if (firstLights) {
+	if (iTimer < startY) {
+		if (bFirstLights) {
 			status[0] = 1;
 			status[5] = 1;
 		}
@@ -52,14 +52,14 @@ void TrafficLights::Use(int startY, int startR, int startSecondY, int endSecondY
 			status[2] = 1;
 			status[3] = 1;
 		}
-	}else  if (timer >= startY && timer < startR) {
+	}else  if (iTimer >= startY && iTimer < startR) {
 		status[1] = 1;
 		status[4] = 1;
-	}else if (timer >= startR && timer < startSecondY) {
+	}else if (iTimer >= startR && iTimer < startSecondY) {
 		status[0] = 1;
 		status[3] = 1;
-	}else if (timer >= startSecondY && timer <= endSecondY) {
-		if (firstLights) {
+	}else if (iTimer >= startSecondY && iTimer <= endSecondY) {
+		if (bFirstLights) {
 			status[2] = 1;
 			status[3] = 1;
 		}
@@ -68,8 +68,8 @@ void TrafficLights::Use(int startY, int startR, int startSecondY, int endSecondY
 			status[4] = 1;
 		}
 	} else {
-			firstLights = !firstLights;
-			timer = 0;
+            bFirstLights = !bFirstLights;
+			iTimer = 0;
 	}
 	setColors(status);
 }

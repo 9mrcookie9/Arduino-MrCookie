@@ -13,31 +13,31 @@
 
 class DHTMain {
 public:
-	void setDHT(uint8_t pin, uint8_t type = DHT11);
-	DHT* dht;
+    void setDHT(uint8_t pin, uint8_t type = DHT11);
+    DHT* dht;
 };
 
 class DhtController {
 public:
-	DHTMain dht;
-	bool lastDataChanged;
-	void checkData();
-	String Humidity;
-	String Temperature;
-	float lastHumidity;
-	float lastTemperature;
+    DHTMain dht;
+    bool lastDataChanged;
+    void Update();
+    String Humidity;
+    String Temperature;
+    float lastHumidity;
+    float lastTemperature;
 };
 
 class AnalogTemperature {
 public:
-	void init(int pin);
-	void checkData();
-	String temp();
-	bool newData;
+    void Init(int pin);
+    void Update();
+    String sTemperature();
+    bool bNewData;
 private:
-	unsigned long timer;
-	int pin;
-	float lastData;
+    unsigned long iTimer;
+    int iPin;
+    float iLastData;
 };
 
 #endif

@@ -11,12 +11,15 @@
 
 class ButtonMain {
 public:
-	void Use(int buttonPinId);
-	bool State;
+    void Init(int iPinId,int iTimerLimit = 10);
+    bool State();
 private:
-	unsigned long timer;
-	int buttonState;
-	int lastState;
+    bool bState;
+	unsigned long iTimer;
+    unsigned long iTimerLimit;
+	int iActualState;
+	int iLastState;
+    int iPin;
 };
 
 #endif

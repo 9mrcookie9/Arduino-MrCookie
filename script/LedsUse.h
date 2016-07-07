@@ -11,22 +11,21 @@
 
 class LedUse{
 public:
-	void init(int Pin);
-	void changeState(int state);
+	void Init(int iPin);
+	void changeState(int iState);
 private:
-	int pin;
+	int iPin;
 };
-
 
 class TrafficLights {
 public:
-	void init(int pinR1, int pinY1, int pinG1, int pinR2, int pinY2, int pinG2);
-	void Use(int startY,int startR,int startSecondY,int endSecondY);
+	void Init(int iPinR1, int iPinY1, int iPinG1, int iPnR2, int iPinY2, int iPinG2);
+	void Use(int iStartY,int iStartR,int iStartSecondY,int iEndSecondY);
 	void setColors(int status[6]);
 private:
-	unsigned long timer;
-	bool firstLights;
-	int pin[6];
+	unsigned long iTimer;
+	bool bFirstLights;
+	int iPin[6];
 	LedUse led[6];
 };
 

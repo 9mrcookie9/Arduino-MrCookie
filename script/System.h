@@ -7,6 +7,7 @@
 #include "LcdUse.h"
 #include "ButtonUse.h"
 #include "LedsUse.h"
+#include "Network.h"
 
 class SystemMain{
 public:
@@ -16,10 +17,11 @@ public:
   int lcdRefreshTimer;
 private:
   DhtController dhtController;
-  ButtonMain buttonFirst;
   LcdController lcdController;
+  NetworkController networkController;
   TrafficLights trafficLightController;
   AnalogTemperature analogTempController;
+  ButtonMain buttonFirst;
 };
 
 #endif

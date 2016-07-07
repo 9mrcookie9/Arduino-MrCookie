@@ -5,7 +5,7 @@ void DHTMain::setDHT(uint8_t pin, uint8_t type) {
 	dht->begin();
 }
 
-void DhtController::checkData() {
+void DhtController::Update() {
 	if ((dht.dht->readTemperature() != lastTemperature || dht.dht->readHumidity() != lastHumidity) && !lastDataChanged) {
 		lastDataChanged = true;
 		lastHumidity = dht.dht->readHumidity();
@@ -18,26 +18,26 @@ void DhtController::checkData() {
 	}
 }
 
-void AnalogTemperature::init(int Pin) {
-	pin = Pin;
-	checkData();
-	timer = 151;
+void AnalogTemperature::Init(int Pin) {
+	iPin = Pin;
+	Update();
+	iTimer = 151;
 }
 
-void AnalogTemperature::checkData() {
-	timer++;
-	if (timer > 150) {
-		timer = 0;
-		float val = round(analogRead(pin));
-		if (lastData != val) {
-			lastData = val;
-			newData = true;
+void AnalogTemperature::Update() {
+    iTimer++;
+	if (iTimer > 150) {
+        iTimer = 0;
+		float val = round(analogRead(iPin));
+		if (iLastData != val) {
+            iLastData = val;
+			bNewData = true;
 		}
 	}
 }
 
-String AnalogTemperature::temp() {
-	float mv = (lastData / 1024.0) * 5000;
+String AnalogTemperature::sTemperature() {
+	float mv = (iLastData / 1024.0) * 5000;
 	float cel = mv / 10;
 	return String(String(round(cel)) + String("C"));
 }
