@@ -4,7 +4,9 @@ void ButtonMain::Init(int pinId, int timerLimit) {
     iPin = pinId;
     iTimerLimit = timerLimit;
 }
-
+void ButtonMain::SetState(bool toSet) {
+    bState = toSet;
+}
 bool ButtonMain::State() {
     if (iTimer == 0)
         iActualState = digitalRead(iPin);

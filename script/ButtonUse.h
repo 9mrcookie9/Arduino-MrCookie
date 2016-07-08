@@ -12,6 +12,7 @@
 class ButtonMain {
 public:
     void Init(int iPinId,int iTimerLimit = 10);
+    void SetState(bool bToSet);
     bool State();
 private:
     bool bState;
