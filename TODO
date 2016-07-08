@@ -2,3 +2,9 @@
 [x]LedTraffic change status to array
 [x]LedTraffic waiting on Red -> Red (Actual Yellow)
 [x]Beauty code
+[x]RGB led support
+[x]Photoresistor support
+[x]Error code support
+[ ]Network support
+[ ]Sd card support
+[ ]multiple slave devices on SPI bus support 
