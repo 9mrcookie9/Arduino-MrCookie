@@ -1,6 +1,6 @@
-// Network.h
-#ifndef _Network_h_
-#define _Network_h_
+// NetworkUse.h
+#ifndef _NETWORKUSE_h_
+#define _NETWORKUSE_h_
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "arduino.h"
 #else
