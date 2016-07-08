@@ -7,6 +7,8 @@
 #include "LcdUse.h"
 #include "ButtonUse.h"
 #include "LedsUse.h"
+#include "NetworkUse.h"
+#include "PhotoresistorUse.h"
 
 SystemMain mainClass;
 

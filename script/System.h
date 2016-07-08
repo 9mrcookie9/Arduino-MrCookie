@@ -7,7 +7,8 @@
 #include "LcdUse.h"
 #include "ButtonUse.h"
 #include "LedsUse.h"
-#include "Network.h"
+#include "NetworkUse.h"
+#include "PhotoresistorUse.h"
 
 class SystemMain{
 public:
@@ -22,7 +23,9 @@ private:
   TrafficLights trafficLightController;
   AnalogTemperature analogTempController;
   ButtonMain buttonFirst;
+  ButtonMain buttonRestetLcd;
+  RGBLed rgbLed;
+  Photoresistor photoresistor;
 };
-
 #endif
 
