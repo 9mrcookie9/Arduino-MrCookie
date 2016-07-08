@@ -1,39 +1,43 @@
 #include "System.h"
 
-void SystemMain::Init(void){
-	Serial.begin(9600);
-	lcdController.lcdClass.SetLcd();
-	dhtController.dht.setDHT(13);
-	analogTempController.Init(0);
-	trafficLightController.Init(2, 3, 4, 5, 6, 7);
-    buttonFirst.Init(12);
-    networkController.Init();
+void SystemMain::Init(void) {
+    Serial.begin(9600);
+    lcdController.lcdClass.SetLcd();
+    dhtController.dht.setDHT(2);
+    analogTempController.Init(0);
+    buttonFirst.Init(3);
+    buttonRestetLcd.Init(8,5);
+    rgbLed.Init(5, 6, 7);
+    photoresistor.Init(3);
 }
 
-void SystemMain::Setup(void){
-	lcdRefreshTimer = 200;
-//	lcdController.lcdClass.HelloWorld_Debug(0,1);
+void SystemMain::Setup(void) {
+    lcdRefreshTimer = 200;
+    //	lcdController.lcdClass.HelloWorld_Debug(0,1);
 }
 
-void SystemMain::Update(void){
-	lcdController.ScreenRefresh(lcdRefreshTimer);
-	analogTempController.Update();
-	dhtController.Update();
-	trafficLightController.Use(1000,1100,1250,1400);
-
-	if(buttonFirst.State())
-	    lcdController.lcdClass.PrintS("true ",10);
-	else
-		lcdController.lcdClass.PrintS("false",10);
-
-	if (analogTempController.bNewData || lcdController.bClearScreen) {
-		lcdController.lcdClass.PrintS(String("T:"+analogTempController.sTemperature()), 10, 1);
-	}
-	if(dhtController.lastDataChanged || lcdController.bClearScreen){
-		lcdController.lcdClass.PrintS(String("T:"+dhtController.Temperature));
-		lcdController.lcdClass.PrintS(String("W:"+dhtController.Humidity),0,1);
-		dhtController.lastDataChanged = false;
-	}
+void SystemMain::Update(void) {
+    lcdController.ScreenRefresh(lcdRefreshTimer);
+    analogTempController.Update();
+    dhtController.Update();
+    photoresistor.Update();
+    if (buttonRestetLcd.State())
+        lcdController.lcdClass.PrintS("",0,0,true);
+    if(buttonFirst.State())
+        lcdController.lcdClass.PrintS("B:1",11);
+    else
+        lcdController.lcdClass.PrintS("B:0",11);        
+    lcdController.lcdClass.PrintS(String("L:"+photoresistor.sPercentValue()+" "), 11 ,1);
+    if (buttonRestetLcd.State() || dhtController.bLastDataChanged || lcdController.bClearScreen || analogTempController.bNewData) {
+        lcdController.lcdClass.PrintS(String("T:" + dhtController.sTemperature + "," + analogTempController.sTemperature()));
+        lcdController.lcdClass.PrintS(String("W:" + dhtController.sHumidity), 0, 1);
+        rgbLed.SetColor(
+            float((photoresistor.fLogicValue() >= 0.5) ? (255 * (photoresistor.fLogicValue())) : 0),
+            float(0),
+            float((photoresistor.fLogicValue() <= 0.5) ? (255 * (1 - photoresistor.fLogicValue())) : 0));
+        dhtController.bLastDataChanged = false;
+        buttonRestetLcd.SetState(false);
+    }
     lcdController.bClearScreen = false;
 }
 
