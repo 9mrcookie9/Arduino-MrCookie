@@ -1,0 +1,3 @@
+[CODE][NAME]: ERROR_DESC
+
+[E#01][Connection Error]: Probably device is broken or connection pin is not connected!
