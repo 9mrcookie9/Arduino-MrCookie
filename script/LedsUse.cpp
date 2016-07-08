@@ -20,7 +20,7 @@ void LedUse::changeState(int state) {
 }
 
 
-void TrafficLights::init(int iPinR1, int iPinY1, int iPinG1, int iPinR2, int iPinY2, int iPinG2) {
+void TrafficLights::Init(int iPinR1, int iPinY1, int iPinG1, int iPinR2, int iPinY2, int iPinG2) {
 	iPin[0] = iPinR1;
 	iPin[1] = iPinY1;
 	iPin[2] = iPinG1;
@@ -72,4 +72,25 @@ void TrafficLights::Use(int startY, int startR, int startSecondY, int endSecondY
 			iTimer = 0;
 	}
 	setColors(status);
+}
+
+void RGBLed::Init(int pinR, int pinG, int pinB) {
+    iPinR = pinR;
+    iPinG = pinG;
+    iPinB = pinB;
+    pinMode(iPinR, OUTPUT);
+    pinMode(iPinG, OUTPUT);
+    pinMode(iPinB, OUTPUT);
+}
+
+void RGBLed::SetColor(int iR, int iG, int iB) {
+    analogWrite(iPinR,255-iR);
+    analogWrite(iPinG,255-iG);
+    analogWrite(iPinB,255-iB);
+}
+
+void RGBLed::SetColor(float fR, float fG, float fB) {
+    analogWrite(iPinR, round(255 - fR));
+    analogWrite(iPinG, round(255 - fG));
+    analogWrite(iPinB, round(255 - fB));
 }

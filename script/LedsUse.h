@@ -9,6 +9,17 @@
 	#include "WProgram.h"
 #endif
 
+class RGBLed {
+public:
+    void Init(int iPinR,int iPinG,int iPingB);
+    void SetColor(int iR,int iG,int iB);
+    void SetColor(float fR,float fG,float fB);
+private:
+    int iPinR;
+    int iPinG;
+    int iPinB;
+};
+
 class LedUse{
 public:
 	void Init(int iPin);
@@ -28,7 +39,5 @@ private:
 	int iPin[6];
 	LedUse led[6];
 };
-
-
 #endif
 
