@@ -20,12 +20,12 @@ public:
 class DhtController {
 public:
     DHTMain dht;
-    bool lastDataChanged;
+    bool bLastDataChanged;
     void Update();
-    String Humidity;
-    String Temperature;
-    float lastHumidity;
-    float lastTemperature;
+    String sHumidity;
+    String sTemperature;
+    float iLastHumidity;
+    float iLastTemperature;
 };
 
 class AnalogTemperature {

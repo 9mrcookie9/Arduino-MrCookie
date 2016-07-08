@@ -6,15 +6,14 @@ void DHTMain::setDHT(uint8_t pin, uint8_t type) {
 }
 
 void DhtController::Update() {
-	if ((dht.dht->readTemperature() != lastTemperature || dht.dht->readHumidity() != lastHumidity) && !lastDataChanged) {
-		lastDataChanged = true;
-		lastHumidity = dht.dht->readHumidity();
-		lastTemperature = dht.dht->readTemperature();
+    if ((dht.dht->readTemperature() != iLastTemperature || dht.dht->readHumidity() != iLastHumidity) && !bLastDataChanged) {
+        bLastDataChanged = true;
+        iLastTemperature = dht.dht->readTemperature();
+        iLastHumidity = dht.dht->readHumidity();
 
-		Temperature = String(round(dht.dht->readTemperature()));
-		Temperature = String(Temperature + "C");
-		Humidity = String(round(dht.dht->readHumidity()));
-		Humidity = String(Humidity + "%");
+        //If temp or humidity is smaller than very low number, its propably not connected to board!
+        sTemperature = (round(iLastTemperature) > -99999) ? String(String(round(iLastTemperature)) + "C") : String("E#01");
+        sHumidity = (round(iLastHumidity) > -99999) ? String(String(round(iLastHumidity)) + "%") : String("E#01");
 	}
 }
 
@@ -39,5 +38,5 @@ void AnalogTemperature::Update() {
 String AnalogTemperature::sTemperature() {
 	float mv = (iLastData / 1024.0) * 5000;
 	float cel = mv / 10;
-	return String(String(round(cel)) + String("C"));
+    return (100 > cel)?String(String(round(cel)) + String("C")):String("E#01");
 }
