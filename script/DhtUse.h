@@ -3,7 +3,7 @@
 #ifndef _DHTUSE_h
 #define _DHTUSE_h
 
-#include <DHT.h>
+#include "Libs\DTH_Lib\DHT.h"
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "arduino.h"
