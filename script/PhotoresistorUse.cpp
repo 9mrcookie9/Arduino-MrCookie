@@ -1,4 +1,4 @@
-#include "Photoresistor.h"
+#include "PhotoresistorUse.h"
 
 void Photoresistor::Init(int iAnalogPin) {
     iPin = iAnalogPin;

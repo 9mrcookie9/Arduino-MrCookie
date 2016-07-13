@@ -1,4 +1,4 @@
-#include "Network.h"
+#include "NetworkUse.h"
 
 //TODO: Setup this class
 void Network::Init() {
