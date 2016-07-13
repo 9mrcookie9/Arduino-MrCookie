@@ -4,7 +4,7 @@
 #define _LCDUSE_h
 
 #include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+#include "LiquidCrystal_I2C.h"
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "arduino.h"
