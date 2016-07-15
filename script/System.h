@@ -9,6 +9,7 @@
 #include "LedsUse.h"
 #include "NetworkUse.h"
 #include "PhotoresistorUse.h"
+#include "OtherAnalogSensorsUse.h"
 
 class SystemMain{
 public:
@@ -17,6 +18,7 @@ public:
   void Update(void);
   int lcdRefreshTimer;
 private:
+  static byte Mac[];
   DhtController dhtController;
   LcdController lcdController;
   NetworkController networkController;
@@ -26,6 +28,7 @@ private:
   ButtonMain buttonRestetLcd;
   RGBLed rgbLed;
   Photoresistor photoresistor;
+  SoilMoistureSensor soilMoistureSensor;
 };
 #endif
 
