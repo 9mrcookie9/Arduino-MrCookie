@@ -18,7 +18,7 @@ void DhtController::Update() {
 }
 
 void AnalogTemperature::Init(int Pin) {
-	iPin = Pin;
+    iPin = Pin;
 	Update();
 	iTimer = 151;
 }

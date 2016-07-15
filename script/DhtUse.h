@@ -30,7 +30,7 @@ public:
 
 class AnalogTemperature {
 public:
-    void Init(int pin);
+    void Init(int iAnalogPin);
     void Update();
     String sTemperature();
     bool bNewData;
