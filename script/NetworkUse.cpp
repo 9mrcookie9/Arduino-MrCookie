@@ -1,10 +1,8 @@
 #include "NetworkUse.h"
-
-//TODO: Setup this class
-void Network::Init() {
+void Network::Init(uint8_t mac[], char* dns, int pin) {
+   
 }
 
-void NetworkController::Init() {
-    network = new Network();
-    network->Init();
+void Network::Init(byte ip[], byte gw[], byte dns[]) {
+
 }
