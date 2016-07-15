@@ -1,6 +1,7 @@
 #include "ButtonUse.h"
 
 void ButtonMain::Init(int pinId, int timerLimit) {
+    pinMode(pinId,OUTPUT);
     iPin = pinId;
     iTimerLimit = timerLimit;
 }
