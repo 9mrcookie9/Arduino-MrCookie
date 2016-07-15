@@ -30,6 +30,7 @@ void TrafficLights::Init(int iPinR1, int iPinY1, int iPinG1, int iPinR2, int iPi
 
 	for (int i = 0; i < 6; i++) {
 		led[i].Init(iPin[i]);
+        pinMode(iPin[i],OUTPUT);
 	}
 }
 
